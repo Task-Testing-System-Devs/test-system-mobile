@@ -7,6 +7,7 @@ import 'package:hse_lyc_code_test_system/feature/profile/view/profile_view.dart'
 import 'package:hse_lyc_code_test_system/feature/rating/view/rating_view.dart';
 import 'package:hse_lyc_code_test_system/feature/sent_tasks/view/sent_tasks_view.dart';
 import 'package:hse_lyc_code_test_system/service/navigation_service.dart';
+import 'package:hse_lyc_code_test_system/shared/theme/app_themes.dart';
 
 class CodeTestSystem extends StatefulWidget {
   const CodeTestSystem({Key? key}) : super(key: key);
@@ -29,8 +30,10 @@ class _CodeTestSystemState extends State<CodeTestSystem> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      designSize: const Size(375, 812),
       builder: (context, child) {
         return MaterialApp(
+          theme: AppThemes.lightTheme,
           home: Scaffold(
             body: pages[currentIndex],
             bottomNavigationBar: BottomNavigationBar(
