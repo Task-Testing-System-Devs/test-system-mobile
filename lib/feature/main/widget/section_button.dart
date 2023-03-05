@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hse_lyc_code_test_system/shared/theme/app_text_styles.dart';
 
 class SectionButton extends StatelessWidget {
   final String text;
@@ -30,10 +31,7 @@ class SectionButton extends StatelessWidget {
             icon,
             Text(
               text,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-              ),
+              style: AppTextStyles.body16.copyWith(color: Colors.white),
             ),
           ],
         ),
