@@ -14,7 +14,10 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Профиль'),
+        centerTitle: true,
+      ),
       body: ListView(
         children: <Widget>[
           Padding(

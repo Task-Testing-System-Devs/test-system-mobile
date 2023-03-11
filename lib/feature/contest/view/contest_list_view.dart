@@ -51,14 +51,12 @@ class _ContestListViewState extends State<ContestListView> {
   ];
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text('Контесты'),
+        centerTitle: true,
+      ),
       body: ListView.separated(
         padding: EdgeInsets.symmetric(
           horizontal: 16.w,
