@@ -1,5 +1,5 @@
 name: hse_lyc_code_test_system
-description: A new Flutter project.
+description: Mobile App of HSE Lyceum Programming Testing System with Automated Rating Estimation.
 
 publish_to: 'none'
 
@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  mask_text_input_formatter: ^2.4.0
+  flutter_screenutil: ^5.6.1
+  flutter_riverpod: ^2.2.0
 
   cupertino_icons: ^1.0.2
 
