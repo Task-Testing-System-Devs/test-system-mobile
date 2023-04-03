@@ -29,7 +29,7 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatter != null ? [widget.inputFormatter!] : null,
       decoration: InputDecoration(
         enabledBorder: _textFieldBorder(Colors.grey[500]!),
-        focusedBorder: _textFieldBorder(Colors.white),
+        focusedBorder: _textFieldBorder(Colors.black),
         hintText: widget.hintText,
       ),
     );
