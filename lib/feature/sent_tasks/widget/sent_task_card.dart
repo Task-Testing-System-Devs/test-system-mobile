@@ -18,7 +18,7 @@ class SentTaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                sentTaskModel.taskName,
+                sentTaskModel.id.toString(),
                 style: AppTextStyles.body16,
               ),
               Text(

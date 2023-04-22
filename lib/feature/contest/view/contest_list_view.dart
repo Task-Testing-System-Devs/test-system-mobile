@@ -24,33 +24,6 @@ class _ContestListViewState extends State<ContestListView> {
       isMarkRated: true,
       isTaskRated: true,
     ),
-    ContestModel(
-      id: 2,
-      title: 'Контест 2',
-      startTime: "11.02.2023",
-      finishTime: "12.02.2023",
-      isResolvable: false,
-      isMarkRated: true,
-      isTaskRated: false,
-    ),
-    ContestModel(
-      id: 3,
-      title: 'Контест 3',
-      startTime: "11.02.2023",
-      finishTime: "12.02.2023",
-      isResolvable: false,
-      isMarkRated: false,
-      isTaskRated: true,
-    ),
-    ContestModel(
-      id: 4,
-      title: 'Контест 4',
-      startTime: "11.02.2023",
-      finishTime: "12.02.2023",
-      isResolvable: false,
-      isMarkRated: true,
-      isTaskRated: true,
-    ),
   ];
 
   @override

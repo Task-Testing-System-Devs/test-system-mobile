@@ -40,7 +40,7 @@ class _ProfileViewState extends State<ProfileView> {
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data is int) {
+            if (snapshot.data is int || !snapshot.hasData) {
               return const Center(
                 child: Text('Ошибка при получении данных'),
               );

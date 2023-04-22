@@ -12,11 +12,11 @@ class SentTasksView extends StatefulWidget {
 
 class _SentTasksViewState extends State<SentTasksView> {
   final sentTasks = <SentTaskModel>[
-    SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
-    SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
-    SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
-    SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
-    SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
+    // SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
+    // SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
+    // SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
+    // SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
+    // SentTaskModel(taskName: 'Задача 1', id: '3432423', time: 0.5, memory: 64.0),
   ];
 
   @override

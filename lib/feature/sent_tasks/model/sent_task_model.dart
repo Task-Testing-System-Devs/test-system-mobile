@@ -1,13 +1,15 @@
 class SentTaskModel {
-  final String taskName;
   final String id;
   final double time;
   final double memory;
+  final String status;
+  final String errorOnTest;
 
   SentTaskModel({
-    required this.taskName,
     required this.id,
-    required this.time,
-    required this.memory,
+    this.time = 0,
+    this.memory = 0,
+    required this.status,
+    required this.errorOnTest,
   });
 }
