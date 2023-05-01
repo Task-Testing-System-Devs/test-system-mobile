@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hse_lyc_code_test_system/feature/rating/model/rating_model.dart';
+import 'package:hse_lyc_code_test_system/feature/rating/presenter/rating_presenter.dart';
+import 'package:hse_lyc_code_test_system/feature/rating/widget/rating_card.dart';
+import 'package:hse_lyc_code_test_system/service/shared_preferences_service.dart';
 
 class RatingView extends StatefulWidget {
   const RatingView({Key? key}) : super(key: key);
@@ -9,12 +13,14 @@ class RatingView extends StatefulWidget {
 
 class _RatingViewState extends State<RatingView> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
+  final _ratingPresenter = RatingPresenter();
+  final _sharedPreferencesService = SharedPreferencesService();
 
   final tabs = <Tab>[
-    Tab(
+    const Tab(
       text: 'По оценкам',
     ),
-    Tab(
+    const Tab(
       text: 'По задачам',
     ),
   ];
@@ -48,8 +54,37 @@ class _RatingViewState extends State<RatingView> with SingleTickerProviderStateM
       body: TabBarView(
         controller: _tabController,
         children: tabs.map((tab) {
-          return Center(
-            child: Text(tab.text!),
+          Future? ratingFuture;
+          if (tab.text == 'По оценкам') {
+            ratingFuture = _ratingPresenter.getRatingByMarks(_sharedPreferencesService.token);
+          } else if (tab.text == 'По задачам') {
+            ratingFuture = _ratingPresenter.getRatingByTasksAmount(_sharedPreferencesService.token);
+          }
+
+          return FutureBuilder(
+            future: ratingFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (snapshot.hasData) {
+                final data = snapshot.data as List<dynamic>;
+                return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return StudentRatingCard(
+                      place: index + 1,
+                      ratingModel: data[index],
+                    );
+                  },
+                );
+              }
+              return const Center(
+                child: Text('Ошибка'),
+              );
+            },
           );
         }).toList(),
       ),

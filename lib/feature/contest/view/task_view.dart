@@ -129,15 +129,15 @@ class _TaskViewState extends State<TaskView> {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
-                        Text(e.id),
-                        SizedBox(
+                        Text(e.taskName ?? ''),
+                        const SizedBox(
                           width: 8.0,
                         ),
                         Text(e.status),
-                        SizedBox(
+                        const SizedBox(
                           width: 8.0,
                         ),
-                        Text(e.errorOnTest),
+                        Text(e.errorTest),
                       ],
                     ),
                   );
@@ -179,7 +179,7 @@ class _TaskViewState extends State<TaskView> {
                 SentTaskModel(
                   id: '${widget.taskModel.id}',
                   status: result['status'],
-                  errorOnTest: result['error'],
+                  errorTest: result['error'],
                 ),
               );
               setState(() {});

@@ -11,7 +11,7 @@ class ProfilePresenter {
       'Authorization': 'Bearer $token',
     });
     if (response.statusCode == 200) {
-      return ProfileModel.fromJson(jsonDecode(response.body));
+      return ProfileModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
       return response.statusCode;
     }

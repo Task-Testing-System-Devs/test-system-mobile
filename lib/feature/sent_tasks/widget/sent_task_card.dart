@@ -18,19 +18,19 @@ class SentTaskCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                sentTaskModel.id.toString(),
+                sentTaskModel.id,
                 style: AppTextStyles.body16,
               ),
               Text(
-                'ID: ${sentTaskModel.id}',
+                'ID: ${sentTaskModel.taskName}',
                 style: AppTextStyles.body16,
               ),
               Text(
-                'Время исполнения: ${sentTaskModel.time} с',
+                'Время исполнения: ${sentTaskModel.usedTime} с',
                 style: AppTextStyles.body16,
               ),
               Text(
-                'Использованная память: ${sentTaskModel.memory} МБ',
+                'Использованная память: ${sentTaskModel.usedTime} МБ',
                 style: AppTextStyles.body16,
               ),
             ],

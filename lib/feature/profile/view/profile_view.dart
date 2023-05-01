@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hse_lyc_code_test_system/feature/auth/view/auth_view.dart';
+import 'package:hse_lyc_code_test_system/feature/code_test_system.dart';
 import 'package:hse_lyc_code_test_system/feature/profile/model/profile_model.dart';
 import 'package:hse_lyc_code_test_system/feature/profile/presenter/profile_presenter.dart';
-import 'package:hse_lyc_code_test_system/feature/profile/widget/rating_card.dart';
+import 'package:hse_lyc_code_test_system/feature/profile/widget/profile_rating_card.dart';
+import 'package:hse_lyc_code_test_system/service/navigation_service.dart';
 import 'package:hse_lyc_code_test_system/service/shared_preferences_service.dart';
 import 'package:hse_lyc_code_test_system/shared/theme/app_text_styles.dart';
 
@@ -31,6 +34,18 @@ class _ProfileViewState extends State<ProfileView> {
       appBar: AppBar(
         title: const Text('Профиль'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            onPressed: () async {
+              sharedPreferencesService.token = '';
+              await NavigationService.pushAndRemoveAll(
+                context,
+                const CodeTestSystem(),
+              );
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: profileInfo,
@@ -129,15 +144,15 @@ class _ProfileViewState extends State<ProfileView> {
                       SizedBox(
                         width: 16.w,
                       ),
-                      const RatingCard(text: 'Место в рейтинге по направлению'),
+                      const ProfileRatingCard(text: 'Место в рейтинге по направлению'),
                       SizedBox(
                         width: 16.w,
                       ),
-                      const RatingCard(text: 'Место в рейтинге по группе'),
+                      const ProfileRatingCard(text: 'Место в рейтинге по группе'),
                       SizedBox(
                         width: 16.w,
                       ),
-                      const RatingCard(text: 'Место в общем рейтинге'),
+                      const ProfileRatingCard(text: 'Место в общем рейтинге'),
                       SizedBox(
                         width: 16.w,
                       ),
