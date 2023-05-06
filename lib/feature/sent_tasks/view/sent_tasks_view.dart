@@ -39,6 +39,14 @@ class _SentTasksViewState extends State<SentTasksView> {
             );
           } else if (snapshot.hasData) {
             final sentTasks = snapshot.data as List<SentTaskModel>;
+            if (sentTasks.isEmpty) {
+              return const Center(
+                child: Text(
+                  'У вас нет ни одной посылки!',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+              );
+            }
             return ListView.separated(
               padding: EdgeInsets.symmetric(
                 horizontal: 16.w,
@@ -52,13 +60,6 @@ class _SentTasksViewState extends State<SentTasksView> {
                 );
               },
               itemCount: sentTasks.length,
-            );
-          } else if (!snapshot.hasData && !snapshot.hasError) {
-            return const Center(
-              child: Text(
-                'У вас нет ни одной посылки!',
-                style: TextStyle(fontSize: 18.0),
-              ),
             );
           }
           return const Center(

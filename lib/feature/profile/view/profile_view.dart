@@ -105,14 +105,16 @@ class _ProfileViewState extends State<ProfileView> {
                                   'E-mail: ${profileData.email}',
                                   style: AppTextStyles.body16,
                                 ),
-                                Text(
-                                  'Группа: ${profileData.group}',
-                                  style: AppTextStyles.body16,
-                                ),
-                                Text(
-                                  'Направление: ${profileData.department}',
-                                  style: AppTextStyles.body16,
-                                ),
+                                if (profileData.group != null)
+                                  Text(
+                                    'Группа: ${profileData.group}',
+                                    style: AppTextStyles.body16,
+                                  ),
+                                if (profileData.department != null)
+                                  Text(
+                                    'Направление: ${profileData.department}',
+                                    style: AppTextStyles.body16,
+                                  ),
                                 Text(
                                   'Всего решено задач: *',
                                   style: AppTextStyles.body16,

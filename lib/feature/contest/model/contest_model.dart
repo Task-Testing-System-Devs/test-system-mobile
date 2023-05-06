@@ -1,19 +1,22 @@
 class ContestModel {
   final int id;
   final String title;
-  final String startTime;
-  final String finishTime;
-  final bool isResolvable;
-  final bool isMarkRated;
-  final bool isTaskRated;
+  final DateTime startTime;
+  final DateTime finishTime;
 
   ContestModel({
     required this.id,
     required this.title,
     required this.startTime,
     required this.finishTime,
-    required this.isResolvable,
-    required this.isMarkRated,
-    required this.isTaskRated,
   });
+
+  factory ContestModel.fromJson(Map<String, dynamic> json) {
+    return ContestModel(
+      id: json['ejudge_id'],
+      title: json['title'],
+      startTime: DateTime.parse(json['start_time']),
+      finishTime: DateTime.parse(json['finish_time']),
+    );
+  }
 }

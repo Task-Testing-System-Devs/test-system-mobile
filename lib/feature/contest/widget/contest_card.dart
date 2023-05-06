@@ -25,34 +25,10 @@ class ContestCard extends StatelessWidget {
               Text(contestModel.title),
               Text('Начало: ${contestModel.startTime}'),
               Text('Конец: ${contestModel.finishTime}'),
-              Text(_getMarkText()),
-              Text(_getTaskText()),
-              Text(_getResolvableInfoText()),
             ],
           ),
         ),
       ),
     );
-  }
-
-  String _getMarkText() {
-    if (contestModel.isMarkRated) {
-      return 'Учитывается в рейтинге по оценками';
-    }
-    return 'Не учитывается в рейтинге по оценками';
-  }
-
-  String _getTaskText() {
-    if (contestModel.isTaskRated) {
-      return 'Учитывается в рейтинге по задачам';
-    }
-    return 'Не учитывается в рейтинге по задачам';
-  }
-
-  String _getResolvableInfoText() {
-    if (contestModel.isResolvable) {
-      return 'Можно решать после завершения';
-    }
-    return 'Нельзя решать после завершения';
   }
 }

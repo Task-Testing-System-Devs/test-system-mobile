@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hse_lyc_code_test_system/feature/contest/model/contest_model.dart';
 import 'package:hse_lyc_code_test_system/feature/contest/model/task_model.dart';
 import 'package:hse_lyc_code_test_system/feature/contest/view/task_view.dart';
 import 'package:hse_lyc_code_test_system/service/ejudge_service.dart';
 
 class ContestTasksView extends StatefulWidget {
-  const ContestTasksView({Key? key}) : super(key: key);
+  final ContestModel contestModel;
+
+  const ContestTasksView({
+    Key? key,
+    required this.contestModel,
+  }) : super(key: key);
 
   @override
   State<ContestTasksView> createState() => _ContestTasksViewState();

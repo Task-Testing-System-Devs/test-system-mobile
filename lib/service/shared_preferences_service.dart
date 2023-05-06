@@ -14,4 +14,12 @@ class SharedPreferencesService {
   set token(String value) {
     instance!.setString('user_token', value);
   }
+
+  String get role {
+    return instance!.getString('role') ?? '';
+  }
+
+  set role(String value) {
+    instance!.setString('role', value);
+  }
 }

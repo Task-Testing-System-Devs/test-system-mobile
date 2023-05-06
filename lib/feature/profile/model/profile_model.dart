@@ -4,8 +4,8 @@ class ProfileModel {
   final String lastName;
   final String middleName;
   final String email;
-  final String department;
-  final String group;
+  final String? department;
+  final String? group;
 
   ProfileModel({
     required this.id,
@@ -13,8 +13,8 @@ class ProfileModel {
     required this.lastName,
     required this.middleName,
     required this.email,
-    required this.department,
-    required this.group,
+    this.department,
+    this.group,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
