@@ -20,4 +20,16 @@ class SentTaskModel {
     this.usedTime,
     this.usedMemory,
   });
+
+  factory SentTaskModel.fromJson(Map<String, dynamic> json) {
+    return SentTaskModel(
+      id: 'testId1',
+      code: json['code'],
+      language: json['language'],
+      status: json['status'],
+      usedTime: json['used_time'],
+      usedMemory: json['used_memory'],
+      errorTest: json['error_test'],
+    );
+  }
 }

@@ -17,7 +17,10 @@ class StudentRatingCard extends StatelessWidget {
       margin: const EdgeInsets.all(4.0),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text('$place : ${ratingModel.id} ${ratingModel.email}'),
+        child: Text(
+          '$place. ${ratingModel.lastName} ${ratingModel.firstName} ${ratingModel.middleName}',
+          style: const TextStyle(fontSize: 16.0),
+        ),
       ),
     );
   }

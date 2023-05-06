@@ -70,6 +70,7 @@ class _RatingViewState extends State<RatingView> with SingleTickerProviderStateM
                 );
               }
               if (snapshot.hasData) {
+                print(snapshot.data);
                 final data = snapshot.data as List<dynamic>;
                 return ListView.builder(
                   itemCount: data.length,

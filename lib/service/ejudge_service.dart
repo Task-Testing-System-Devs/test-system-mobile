@@ -24,6 +24,7 @@ class EjudgeService {
     );
     print(authResponse.body);
     final response = await http.get(Uri.parse('$_url/parseTasks'));
+    print(response.body);
     final body = jsonDecode(response.body)['message'];
 
     if (body is String) {

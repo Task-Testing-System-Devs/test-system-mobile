@@ -7,9 +7,12 @@ class ProfilePresenter {
   final apiService = ApiService();
 
   Future<dynamic> getProfileInfo(String token) async {
-    final response = await apiService.get(endpoint: '/profile/get-info', headers: <String, String>{
-      'Authorization': 'Bearer $token',
-    });
+    final response = await apiService.get(
+      endpoint: '/profile/get-student-info',
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      },
+    );
     if (response.statusCode == 200) {
       return ProfileModel.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
