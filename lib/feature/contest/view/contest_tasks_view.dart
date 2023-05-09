@@ -4,6 +4,7 @@ import 'package:hse_lyc_code_test_system/feature/contest/model/contest_model.dar
 import 'package:hse_lyc_code_test_system/feature/contest/model/task_model.dart';
 import 'package:hse_lyc_code_test_system/feature/contest/view/task_view.dart';
 import 'package:hse_lyc_code_test_system/service/ejudge_service.dart';
+import 'package:hse_lyc_code_test_system/shared/theme/app_text_styles.dart';
 
 class ContestTasksView extends StatefulWidget {
   final ContestModel contestModel;
@@ -18,76 +19,100 @@ class ContestTasksView extends StatefulWidget {
 }
 
 class _ContestTasksViewState extends State<ContestTasksView> {
-  final ejudgeService = EjudgeService();
-  late final Future<List<TaskModel>> tasksFuture;
+  final _ejudgeService = EjudgeService();
+  final _pageController = PageController();
+  int _currentPage = 0;
+
+  late final Future<List<TaskModel>> _tasksFuture;
 
   @override
   void initState() {
     super.initState();
-    tasksFuture = ejudgeService.parseTasks();
+    _tasksFuture = _ejudgeService.parseTasks(widget.contestModel.id);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(widget.contestModel.title),
+        centerTitle: true,
+      ),
       body: FutureBuilder(
-          future: tasksFuture,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
-              final tasks = snapshot.data as List<TaskModel>;
+        future: _tasksFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+            final tasks = snapshot.data as List<TaskModel>;
 
-              return Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: tasks.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return SizedBox(
-                          height: 40.h,
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                tasks[index].title,
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                ),
-                              ),
+            return Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 24.h,
+                ),
+                SizedBox(
+                  height: 40.h,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: tasks.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          _pageController.jumpToPage(index);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: _currentPage == index ? Colors.deepPurpleAccent : Colors.blue,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 8.h,
+                            ),
+                            child: Text(
+                              tasks[index].title,
+                              style: AppTextStyles.head22.copyWith(color: Colors.white),
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                  SizedBox(
-                    height: 20.h,
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemBuilder: (context, index) {
+                      return TaskView(
+                        contestName: widget.contestModel.title,
+                        taskModel: tasks[index],
+                      );
+                    },
+                    itemCount: tasks.length,
+                    onPageChanged: (pageNumber) {
+                      _currentPage = pageNumber;
+                      setState(() {});
+                    },
                   ),
-                  Expanded(
-                    child: PageView.builder(
-                      itemBuilder: (context, index) {
-                        return TaskView(taskModel: tasks[index]);
-                      },
-                      itemCount: tasks.length,
-                    ),
-                  ),
-                ],
-              );
-            }
-            if (snapshot.hasError) {
-              print(snapshot.error.toString());
-            }
-            return const Center(child: Text('Error'));
-          }),
+                ),
+              ],
+            );
+          }
+          return const Center(
+            child: Text('Произошла непредвиденная ошибка!'),
+          );
+        },
+      ),
     );
   }
 }

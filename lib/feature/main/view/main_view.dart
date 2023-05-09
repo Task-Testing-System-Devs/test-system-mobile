@@ -28,7 +28,7 @@ class _MainViewState extends State<MainView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Добро пожаловать, Имя Отчество!',
+                'Добро пожаловать! Самое время решить задачи :)',
                 style: AppTextStyles.head24,
               ),
               SizedBox(
@@ -38,7 +38,7 @@ class _MainViewState extends State<MainView> {
                 children: <Widget>[
                   SectionButton(
                     text: 'Контесты',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.add_card,
                       color: Colors.white,
                     ),
@@ -49,7 +49,7 @@ class _MainViewState extends State<MainView> {
                   ),
                   SectionButton(
                     text: 'Рейтинг',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.data_thresholding_outlined,
                       color: Colors.white,
                     ),
@@ -64,7 +64,7 @@ class _MainViewState extends State<MainView> {
                 children: <Widget>[
                   SectionButton(
                     text: 'Посылки',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.send,
                       color: Colors.white,
                     ),
@@ -75,7 +75,7 @@ class _MainViewState extends State<MainView> {
                   ),
                   SectionButton(
                     text: 'Профиль',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.person,
                       color: Colors.white,
                     ),

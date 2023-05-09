@@ -4,15 +4,16 @@ import 'package:hse_lyc_code_test_system/feature/rating/model/rating_model.dart'
 import 'package:hse_lyc_code_test_system/service/api_service.dart';
 
 class RatingPresenter {
-  final apiService = ApiService();
+  final _apiService = ApiService();
 
   Future<dynamic> getRatingByMarks(String token) async {
-    final response = await apiService.get(
+    final response = await _apiService.get(
       endpoint: '/grade/by-marks',
       headers: <String, String>{
         'Authorization': 'Bearer $token',
       },
     );
+    print(response.body);
     if (response.statusCode == 200) {
       final rating = jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
       for (int i = 0; i < rating.length; i++) {
@@ -25,7 +26,7 @@ class RatingPresenter {
   }
 
   Future<dynamic> getRatingByTasksAmount(String token) async {
-    final response = await apiService.get(
+    final response = await _apiService.get(
       endpoint: '/grade/by-tasks-amount',
       headers: <String, String>{
         'Authorization': 'Bearer $token',

@@ -5,6 +5,8 @@ class TaskModel {
   final String memoryLimit;
   final String title;
   final String description;
+  final List<String> inputExamples;
+  final List<String> outputExamples;
 
   TaskModel({
     required this.id,
@@ -13,6 +15,8 @@ class TaskModel {
     required this.memoryLimit,
     required this.title,
     required this.description,
+    required this.inputExamples,
+    required this.outputExamples,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +27,8 @@ class TaskModel {
       memoryLimit: json['memoryLimit'],
       title: json['title'],
       description: json['description'],
+      inputExamples: <String>[...json['inputExamples']],
+      outputExamples: <String>[...json['outputExamples']],
     );
   }
 }

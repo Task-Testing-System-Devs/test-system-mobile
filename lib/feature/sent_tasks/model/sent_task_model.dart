@@ -32,4 +32,17 @@ class SentTaskModel {
       errorTest: json['error_test'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'code': code,
+      'language': language,
+      'status': status,
+      'used_time': 0.2,
+      'used_memory': 2.8,
+      'error_test': errorTest,
+      'contest_name': contestName,
+      'task_name': taskName,
+    };
+  }
 }

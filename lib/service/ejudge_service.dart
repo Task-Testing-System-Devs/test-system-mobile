@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:hse_lyc_code_test_system/feature/contest/model/task_model.dart';
+import 'package:hse_lyc_code_test_system/shared/programming_language.dart';
 import 'package:http/http.dart' as http;
 
 class EjudgeService {
@@ -9,7 +11,7 @@ class EjudgeService {
 
   /// Получает список заданий по id контеста.
   // TODO(kateR): добавить id контеста
-  Future<List<TaskModel>> parseTasks() async {
+  Future<List<TaskModel>> parseTasks(int contestId) async {
     final authResponse = await http.post(
       Uri.parse('$_url/auth'),
       headers: <String, String>{
@@ -19,7 +21,7 @@ class EjudgeService {
       body: jsonEncode(<String, dynamic>{
         'login': 'ejudge',
         'password': 'ejudge',
-        'contestID': 1,
+        'contestID': contestId,
       }),
     );
     print(authResponse.body);
@@ -38,7 +40,7 @@ class EjudgeService {
     }
   }
 
-  Future<void> sendTask(String base64code, int taskId) async {
+  Future<void> sendTask(String base64code, int taskId, ProgrammingLanguage language) async {
     final response = await http.post(
       Uri.parse('$_url/handleSolution'),
       headers: <String, String>{
@@ -49,9 +51,17 @@ class EjudgeService {
         {
           'solutionFileBase64': base64code,
           'taskID': '$taskId',
+          'language': language.value,
         },
       ),
     );
+    log('${jsonEncode(
+      {
+        'solutionFileBase64': base64code,
+        'taskID': '$taskId',
+        'language': language.value,
+      },
+    )}');
     print(response.body);
   }
 
