@@ -109,7 +109,12 @@ class _TaskViewState extends State<TaskView> {
           SizedBox(
             height: 16.h,
           ),
-          const Text('Решение', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w700)),
+          Text(
+            'Решение',
+            style: AppTextStyles.body18.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
           SizedBox(
             height: 16.h,
           ),
