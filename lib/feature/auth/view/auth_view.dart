@@ -55,6 +55,7 @@ class _AuthViewState extends State<AuthView> {
             AppTextField(
               controller: passwordController,
               hintText: '********',
+              isObscure: true,
             ),
             SizedBox(
               height: 16.h,
