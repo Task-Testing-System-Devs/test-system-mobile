@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:hse_lyc_code_test_system/feature/profile/model/profile_model.dart';
 import 'package:hse_lyc_code_test_system/service/api_service.dart';
@@ -12,6 +13,7 @@ class ProfilePresenter {
   Future<dynamic> getProfileInfo(String token) async {
     Response response;
 
+    print(_sharedPreferencesService.role);
     if (_sharedPreferencesService.role == 'teacher') {
       response = await _apiService.get(
         endpoint: '/profile/get-teacher-info',
@@ -19,6 +21,7 @@ class ProfilePresenter {
           'Authorization': 'Bearer $token',
         },
       );
+      print(response.body);
     } else {
       response = await _apiService.get(
         endpoint: '/profile/get-student-info',

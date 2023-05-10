@@ -20,6 +20,7 @@ class AuthPresenter {
     );
     if (response.statusCode == 200) {
       sharedPreferencesService.token = jsonDecode(response.body)['token'];
+      sharedPreferencesService.role = jsonDecode(response.body)['role'];
       return response.body;
     } else {
       return response.statusCode;

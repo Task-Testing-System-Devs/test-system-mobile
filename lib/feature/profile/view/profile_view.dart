@@ -115,18 +115,6 @@ class _ProfileViewState extends State<ProfileView> {
                                     'Направление: ${profileData.department}',
                                     style: AppTextStyles.body16,
                                   ),
-                                Text(
-                                  'Всего решено задач: *',
-                                  style: AppTextStyles.body16,
-                                ),
-                                Text(
-                                  'Рейтинг по задачам: *',
-                                  style: AppTextStyles.body16,
-                                ),
-                                Text(
-                                  'Рейтинг по оценкам: *',
-                                  style: AppTextStyles.body16,
-                                ),
                               ],
                             ),
                           ),
@@ -138,29 +126,6 @@ class _ProfileViewState extends State<ProfileView> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 220.h,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      const ProfileRatingCard(text: 'Место в рейтинге по направлению'),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      const ProfileRatingCard(text: 'Место в рейтинге по группе'),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                      const ProfileRatingCard(text: 'Место в общем рейтинге'),
-                      SizedBox(
-                        width: 16.w,
-                      ),
-                    ],
-                  ),
-                )
               ],
             );
           } else {
