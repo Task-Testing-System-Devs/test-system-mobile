@@ -9,25 +9,22 @@ import 'package:hse_lyc_code_test_system/feature/sent_tasks/view/sent_tasks_view
 import 'package:hse_lyc_code_test_system/service/shared_preferences_service.dart';
 import 'package:hse_lyc_code_test_system/shared/theme/app_themes.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class CodeTestSystem extends StatefulWidget {
   const CodeTestSystem({Key? key}) : super(key: key);
 
   @override
-  State<CodeTestSystem> createState() => _CodeTestSystemState();
+  State<CodeTestSystem> createState() => CodeTestSystemState();
 }
 
-class _CodeTestSystemState extends State<CodeTestSystem> {
-  int currentIndex = 0;
-
-  final pages = const <Widget>[
-    MainView(),
-    ContestListView(),
-    RatingView(),
-    SentTasksView(),
-    ProfileView(),
-  ];
-
+class CodeTestSystemState extends State<CodeTestSystem> {
   final sharedPreferencesService = SharedPreferencesService();
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,34 +38,73 @@ class _CodeTestSystemState extends State<CodeTestSystem> {
               ? AuthView(
                   onSuccessfulAuth: () => setState(() {}),
                 )
-              : Scaffold(
-                  body: pages[currentIndex],
-                  bottomNavigationBar: BottomNavigationBar(
-                    unselectedItemColor: Colors.blue,
-                    selectedItemColor: Colors.black,
-                    currentIndex: currentIndex,
-                    onTap: (newIndex) async {
-                      setState(() {
-                        currentIndex = newIndex;
-                      });
-                    },
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
-                      BottomNavigationBarItem(icon: Icon(Icons.add_card), label: 'Контесты'),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.data_thresholding_outlined),
-                        label: 'Рейтинг',
-                      ),
-                      BottomNavigationBarItem(icon: Icon(Icons.send), label: 'Посылки'),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.person),
-                        label: 'Профиль',
-                      ),
-                    ],
-                  ),
-                ),
+              : MainTestSystem(),
         );
       },
     );
+  }
+}
+
+class MainTestSystem extends StatefulWidget {
+  const MainTestSystem({Key? key}) : super(key: key);
+
+  @override
+  State<MainTestSystem> createState() => _MainTestSystemState();
+}
+
+class _MainTestSystemState extends State<MainTestSystem> {
+  int currentPageIndex = 0;
+  late Widget currentPage = MainView(
+    onButtonTap: onTap,
+  );
+
+  late final List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+    pages = <Widget>[
+      MainView(
+        onButtonTap: onTap,
+      ),
+      const ContestListView(),
+      const RatingView(),
+      const SentTasksView(),
+      const ProfileView(),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: currentPage,
+      bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.blue,
+        selectedItemColor: Colors.black,
+        currentIndex: currentPageIndex,
+        onTap: onTap,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Главная'),
+          BottomNavigationBarItem(icon: Icon(Icons.add_card), label: 'Контесты'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.data_thresholding_outlined),
+            label: 'Рейтинг',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.send), label: 'Посылки'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Профиль',
+          ),
+        ],
+      ),
+    );
+  }
+
+  void onTap(int newIndex) {
+    print('tapping');
+    setState(() {
+      currentPageIndex = newIndex;
+      currentPage = pages[newIndex];
+    });
   }
 }
