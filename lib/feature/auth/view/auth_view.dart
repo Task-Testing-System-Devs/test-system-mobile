@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hse_lyc_code_test_system/feature/auth/model/auth_model.dart';
+import 'package:hse_lyc_code_test_system/feature/auth/presenter/auth_presenter.dart';
+import 'package:hse_lyc_code_test_system/feature/main/view/main_view.dart';
+import 'package:hse_lyc_code_test_system/service/api_service.dart';
+import 'package:hse_lyc_code_test_system/service/navigation_service.dart';
 import 'package:hse_lyc_code_test_system/shared/widget/app_elevated_button.dart';
 import 'package:hse_lyc_code_test_system/shared/widget/app_text_field.dart';
 
 class AuthView extends StatefulWidget {
-  const AuthView({Key? key}) : super(key: key);
+  final VoidCallback onSuccessfulAuth;
+
+  const AuthView({
+    Key? key,
+    required this.onSuccessfulAuth,
+  }) : super(key: key);
 
   @override
   State<AuthView> createState() => _AuthViewState();
 }
 
 class _AuthViewState extends State<AuthView> {
+  final authPresenter = AuthPresenter();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -43,13 +55,26 @@ class _AuthViewState extends State<AuthView> {
             AppTextField(
               controller: passwordController,
               hintText: '********',
+              isObscure: true,
             ),
             SizedBox(
               height: 16.h,
             ),
             AppElevatedButton(
               text: 'Авторизоваться',
-              onPressed: () {},
+              onPressed: () async {
+                final response = await authPresenter.login(
+                  AuthModel(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  ),
+                );
+                if (response != 'Invalid credentials') {
+                  if (!mounted) return;
+                  widget.onSuccessfulAuth();
+                }
+                print(response);
+              },
             ),
           ],
         ),

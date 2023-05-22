@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:hse_lyc_code_test_system/feature/contest/model/contest_model.dart';
+import 'package:hse_lyc_code_test_system/shared/theme/app_text_styles.dart';
 
 class ContestCard extends StatelessWidget {
   final ContestModel contestModel;
+  final void Function() onTap;
 
   const ContestCard({
     Key? key,
     required this.contestModel,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(contestModel.title),
-              Text('Начало: ${contestModel.startTime}'),
-              Text('Конец: ${contestModel.finishTime}'),
-              Text(_getMarkText()),
-              Text(_getTaskText()),
-              Text(_getResolvableInfoText()),
+              Text(
+                contestModel.title,
+                style: AppTextStyles.head24,
+              ),
+              Text('Начало: ${getDateTimeString(contestModel.startTime)}'),
+              Text('Конец: ${getDateTimeString(contestModel.finishTime)}'),
             ],
           ),
         ),
@@ -32,24 +35,26 @@ class ContestCard extends StatelessWidget {
     );
   }
 
-  String _getMarkText() {
-    if (contestModel.isMarkRated) {
-      return 'Учитывается в рейтинге по оценками';
+  String getDateTimeString(DateTime dateTime) {
+    String day = dateTime.day.toString();
+    if (dateTime.day >= 1 && dateTime.day <= 9) {
+      day = '0${dateTime.day}';
     }
-    return 'Не учитывается в рейтинге по оценками';
-  }
 
-  String _getTaskText() {
-    if (contestModel.isTaskRated) {
-      return 'Учитывается в рейтинге по задачам';
+    String month = dateTime.month.toString();
+    if (dateTime.month >= 1 && dateTime.month <= 9) {
+      month = '0${dateTime.month}';
     }
-    return 'Не учитывается в рейтинге по задачам';
-  }
 
-  String _getResolvableInfoText() {
-    if (contestModel.isResolvable) {
-      return 'Можно решать после завершения';
+    String hour = dateTime.hour.toString();
+    if (dateTime.hour >= 0 && dateTime.hour <= 9) {
+      hour = '0${dateTime.hour}';
     }
-    return 'Нельзя решать после завершения';
+    String minute = dateTime.minute.toString();
+    if (dateTime.minute >= 0 && dateTime.minute <= 9) {
+      minute = '0${dateTime.minute}';
+    }
+
+    return '$day.$month.${dateTime.year} $hour:$minute';
   }
 }

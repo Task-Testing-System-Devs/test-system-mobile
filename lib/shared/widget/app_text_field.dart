@@ -7,6 +7,7 @@ class AppTextField extends StatefulWidget {
   final TextInputType inputType;
   final String hintText;
   final MaskTextInputFormatter? inputFormatter;
+  final bool isObscure;
 
   const AppTextField({
     Key? key,
@@ -14,6 +15,7 @@ class AppTextField extends StatefulWidget {
     this.inputType = TextInputType.text,
     this.inputFormatter,
     this.hintText = '',
+    this.isObscure = false,
   }) : super(key: key);
 
   @override
@@ -29,9 +31,10 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatter != null ? [widget.inputFormatter!] : null,
       decoration: InputDecoration(
         enabledBorder: _textFieldBorder(Colors.grey[500]!),
-        focusedBorder: _textFieldBorder(Colors.white),
+        focusedBorder: _textFieldBorder(Colors.black),
         hintText: widget.hintText,
       ),
+      obscureText: widget.isObscure,
     );
   }
 

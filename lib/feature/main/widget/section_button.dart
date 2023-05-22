@@ -17,7 +17,7 @@ class SectionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         height: 160.h,
         width: 160.w,
